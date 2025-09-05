@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
             .values({
                 name: user.fullName ?? "",
                 email: email,
+                imageUrl: user?.imageUrl
             })
             .returning();
 
