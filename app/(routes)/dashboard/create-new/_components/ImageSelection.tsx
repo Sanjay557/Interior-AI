@@ -7,7 +7,7 @@ type ImageSelectionProps = {
   selectedImage: (file : File) => void
 }
 
-function ImageSelection({selectedImage} : ImageSelectionProps) {
+function ImageSelection({selectedImage}: any) {
 
   const [file, setFile] = useState<File | null>(null)
 
