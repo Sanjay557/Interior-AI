@@ -7,11 +7,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function RoomType() {
+function RoomType({selectedRoomType}:any) {
   return (
     <div>
     <label className="text-slate-400">Select Room Type *</label>
-      <Select>
+      <Select onValueChange={(value)=> selectedRoomType(value)}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Room Type" />
         </SelectTrigger>
