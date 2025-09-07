@@ -3,6 +3,7 @@
 import React from 'react'
 import ImageSelection from './_components/ImageSelection'
 import RoomType from './_components/RoomType'
+import DesignType from './_components/DesignType'
 
 function CreateNew() {
 
@@ -19,9 +20,10 @@ function CreateNew() {
         <ImageSelection selectedImage={(value:any) => onHandleInputChange(value, 'image')}/>
           <div>
             {/* Room Type */}
-            <RoomType />
+            <RoomType selectedRoomType={(value:any) => onHandleInputChange(value, 'roomType')} />
             
             {/* Design Type */}
+            <DesignType/>
 
             {/* Additional requirement text area(optional) */}
 
