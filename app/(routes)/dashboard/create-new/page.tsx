@@ -18,6 +18,9 @@ function CreateNew() {
     }))
 
     console.log(formData)
+    //1:46:38
+    //The problem is Firebase storage isn't free and I have to pay money to use it.
+    //Wants a payment of Rs.1000 to use it.
   }
   return (
     <div>
