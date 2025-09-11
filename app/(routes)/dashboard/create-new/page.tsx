@@ -31,19 +31,26 @@ function CreateNew() {
     }))
 
     console.log(formData)
-    //1:46:38
-    //The problem is Firebase storage isn't free and I have to pay money to use it.
-    //Wants a payment of Rs.1000 to use it.
-
-    //In youtube Tutorial ImageKit topic started around 1:30:00 Hour
 
   }
 
   const GenerateAiImage = async() => {
-    const rawImageUrl = await SaveRawImagetoImagekit()
-    // const result = await axios.post('/api/redesign-room', formData)
-    // console.log(result)
-    console.log(rawImageUrl)
+    // const rawImageUrl = await SaveRawImagetoImagekit()
+    const rawImageUrl = "xyz"
+    const result = await axios.post('/api/redesign-room', {
+      imageUrl: rawImageUrl,
+      roomType: formData?.roomType,
+      designType: formData?.designType,
+      additionalReq: formData?.additionalReq
+
+    })
+    const aiImageUrl = result.data.result;
+    console.log("AI Generated Image:", aiImageUrl);
+
+
+    const uploadedUrl = await uploadAIImagetoImageKit(aiImageUrl);
+    console.log("Uploaded AI Image:", uploadedUrl);
+    
   }
 
   const SaveRawImagetoImagekit= async() => {
@@ -54,7 +61,6 @@ function CreateNew() {
       //@ts-ignore
       file: formData.image,
       fileName: fileName,
-
     })
 
     console.log("✅ Upload success:", refImageUrl);
@@ -62,6 +68,18 @@ function CreateNew() {
 
 
   }
+
+  const uploadAIImagetoImageKit = async(aiImageUrl: string) => {
+    // const imageRef = await imagekit.upload({
+    //   file: aiImageUrl,
+    //   fileName: Date.now() + '.png',
+    //   isPublished: true,
+    //   useUniqueFileName: false
+    // });
+    // return imageRef.url;
+
+    return "https://ik.imagekit.io/qt3mh7bup/1757600595687.png"
+  };
 
   return (
     <div>
