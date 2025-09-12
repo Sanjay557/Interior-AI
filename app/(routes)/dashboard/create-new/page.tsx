@@ -28,7 +28,7 @@ function CreateNew() {
 
   const [formData, setFormData] = useState<any>({})
   const [loading, setLoading] = useState<boolean>(false)
-  const [outputResult, setOutputResult] = useState<any>()
+  const [aiOutputResult, setAiOutputResult] = useState<any>()
 
   const onHandleInputChange = (value : any, fieldName: string) => {
     setFormData((prev:any) => ({
@@ -59,8 +59,9 @@ function CreateNew() {
     const uploadedUrl = await uploadAIImagetoImageKit(aiImageUrl);
     console.log("Uploaded AI Image:", uploadedUrl);
 
+
     console.log(result.data.result)
-    setOutputResult(result.data.result) //Will change this in future
+    setAiOutputResult(uploadedUrl) //Output Image Url
 
     setLoading(false)
     
