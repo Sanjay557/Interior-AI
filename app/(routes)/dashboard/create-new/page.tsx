@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import ImageKit from "imagekit"
 import { useUser } from '@clerk/nextjs'
+import CustomLoading from './_components/CustomLoading'
 
 
 
@@ -110,7 +111,7 @@ function CreateNew() {
 
           </div>
       </div>
-      {/* <CustomLoading loading={true}/> */}
+      <CustomLoading loading={false}/>
     </div>
   )
 }

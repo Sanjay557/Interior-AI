@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import Image from "next/image";
 
-function customLoading({loading}:any) {
+function CustomLoading({loading}:any) {
   return (
     <AlertDialog open={loading}>
       <AlertDialogContent>
@@ -24,4 +24,4 @@ function customLoading({loading}:any) {
   );
 }
 
-export default customLoading;
+export default CustomLoading;
