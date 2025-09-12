@@ -1,3 +1,6 @@
+import { db } from "@/configs/db";
+import { AiGeneratedImage } from "@/configs/schema";
+import { useUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
 
@@ -6,9 +9,9 @@ export const replicate = new Replicate({
 })
 
 export async function POST(req:any){
-    const {imageUrl,roomType,designType,additionalReq} = await req.json()
+    // const {user} = useUser()
 
-    console.log("API called with:", { imageUrl, roomType, designType, additionalReq });
+    const {imageUrl,roomType,designType,additionalReq,userEmail} = await req.json()
 
     try{
         const prompt = `
@@ -34,7 +37,17 @@ export async function POST(req:any){
         href: "https://ik.imagekit.io/qt3mh7bup/1757600595687.png"
     }
 
-    return NextResponse.json({ result: url.href });
+    const dbResult = await db.insert(AiGeneratedImage).values({
+        roomType: roomType,
+        designType: designType,
+        orgImage: imageUrl,
+        aiImage: url.href,
+        userEmail: userEmail
+
+    }).returning({id:AiGeneratedImage.id})
+
+    console.log(dbResult)
+    return NextResponse.json({ result: dbResult[0] });
 
     }catch(e){
     return NextResponse.json({error:e})

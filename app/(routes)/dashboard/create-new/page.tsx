@@ -8,6 +8,8 @@ import AdditionalReq from './_components/AdditionalReq'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import ImageKit from "imagekit"
+import { useUser } from '@clerk/nextjs'
+
 
 
 const imagekit = new ImageKit({
@@ -21,6 +23,7 @@ const imagekit = new ImageKit({
 
 
 function CreateNew() {
+  const {user} = useUser()
 
   const [formData, setFormData] = useState<any>({})
 
@@ -41,7 +44,8 @@ function CreateNew() {
       imageUrl: rawImageUrl,
       roomType: formData?.roomType,
       designType: formData?.designType,
-      additionalReq: formData?.additionalReq
+      additionalReq: formData?.additionalReq,
+      userEmail: user?.primaryEmailAddress?.emailAddress
 
     })
     const aiImageUrl = result.data.result;
@@ -81,6 +85,7 @@ function CreateNew() {
     return "https://ik.imagekit.io/qt3mh7bup/1757600595687.png"
   };
 
+
   return (
     <div>
       <h2 className='font-bold text-4xl text-purple-600 text-center'>Experience the Magic of AI Remodeling</h2>
@@ -105,6 +110,7 @@ function CreateNew() {
 
           </div>
       </div>
+      {/* <CustomLoading loading={true}/> */}
     </div>
   )
 }
