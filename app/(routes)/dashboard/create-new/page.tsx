@@ -27,6 +27,8 @@ function CreateNew() {
   const {user} = useUser()
 
   const [formData, setFormData] = useState<any>({})
+  const [loading, setLoading] = useState<boolean>(false)
+  const [outputResult, setOutputResult] = useState<any>()
 
   const onHandleInputChange = (value : any, fieldName: string) => {
     setFormData((prev:any) => ({
@@ -39,6 +41,7 @@ function CreateNew() {
   }
 
   const GenerateAiImage = async() => {
+    setLoading(true)
     // const rawImageUrl = await SaveRawImagetoImagekit()
     const rawImageUrl = "xyz"
     const result = await axios.post('/api/redesign-room', {
@@ -55,6 +58,11 @@ function CreateNew() {
 
     const uploadedUrl = await uploadAIImagetoImageKit(aiImageUrl);
     console.log("Uploaded AI Image:", uploadedUrl);
+
+    console.log(result.data.result)
+    setOutputResult(result.data.result) //Will change this in future
+
+    setLoading(false)
     
   }
 
@@ -111,7 +119,7 @@ function CreateNew() {
 
           </div>
       </div>
-      <CustomLoading loading={false}/>
+      <CustomLoading loading={loading}/>
     </div>
   )
 }

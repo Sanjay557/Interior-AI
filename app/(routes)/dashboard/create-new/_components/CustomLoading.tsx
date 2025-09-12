@@ -18,6 +18,7 @@ function CustomLoading({loading}:any) {
       <AlertDialogContent>
         <div className="bg-white flex flex-col items-center my-10 justify-center">
             <Image src={'/star.png'} alt='loading' width={100} height={100} />
+            <h2>Redesigning your room... Don't refresh</h2>
         </div>
       </AlertDialogContent>
     </AlertDialog>
