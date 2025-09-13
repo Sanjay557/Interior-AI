@@ -34,7 +34,7 @@ export async function POST(req:any){
     //Uncomment the code if you actually need something.
 
     const url = {
-        href: "https://ik.imagekit.io/qt3mh7bup/1757600595687.png"
+        href: "/star.png"
     }
 
     const dbResult = await db.insert(AiGeneratedImage).values({
@@ -47,7 +47,7 @@ export async function POST(req:any){
     }).returning({id:AiGeneratedImage.id})
 
     console.log(dbResult)
-    return NextResponse.json({ result: dbResult[0] });
+    return NextResponse.json({ result: url.href });
 
     }catch(e){
     return NextResponse.json({error:e})

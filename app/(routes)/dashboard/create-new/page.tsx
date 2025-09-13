@@ -10,6 +10,7 @@ import axios from 'axios'
 import ImageKit from "imagekit"
 import { useUser } from '@clerk/nextjs'
 import CustomLoading from './_components/CustomLoading'
+import AiOutputDialog from '../_components/AiOutputDialog'
 
 
 
@@ -29,6 +30,8 @@ function CreateNew() {
   const [formData, setFormData] = useState<any>({})
   const [loading, setLoading] = useState<boolean>(false)
   const [aiOutputResult, setAiOutputResult] = useState<any>()
+  const [openOutputDialog, setOpenOutputDialog] = useState<boolean>(false)
+  const [orgImage, setOrgImage] = useState<any>()
 
   const onHandleInputChange = (value : any, fieldName: string) => {
     setFormData((prev:any) => ({
@@ -43,7 +46,9 @@ function CreateNew() {
   const GenerateAiImage = async() => {
     setLoading(true)
     // const rawImageUrl = await SaveRawImagetoImagekit()
-    const rawImageUrl = "xyz"
+    //const rawImageUrl = "https://ik.imagekit.io/qt3mh7bup/1757600595687.png"
+    const rawImageUrl = "/star.png"
+    setOrgImage(rawImageUrl);
     const result = await axios.post('/api/redesign-room', {
       imageUrl: rawImageUrl,
       roomType: formData?.roomType,
@@ -62,7 +67,10 @@ function CreateNew() {
 
     console.log(result.data.result)
     setAiOutputResult(uploadedUrl) //Output Image Url
+    //Basically I have changed direction uploadAIImagetoImageKit should be in 
+    //the route.tsx file. But I did it here. It is getting uploaded but I have to cautious.
 
+    setOpenOutputDialog(true)
     setLoading(false)
     
   }
@@ -92,7 +100,7 @@ function CreateNew() {
     // });
     // return imageRef.url;
 
-    return "https://ik.imagekit.io/qt3mh7bup/1757600595687.png"
+    return "/star.png"
   };
 
 
@@ -121,6 +129,12 @@ function CreateNew() {
           </div>
       </div>
       <CustomLoading loading={loading}/>
+      <AiOutputDialog 
+        openDialog={openOutputDialog} 
+        closeDialog={() => setOpenOutputDialog(false)}
+        orgImage={orgImage}
+        aiImage={aiOutputResult}
+      />
     </div>
   )
 }
