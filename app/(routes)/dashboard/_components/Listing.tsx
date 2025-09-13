@@ -2,13 +2,31 @@
 
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmptyState from "./EmptyState";
 import Link from "next/link";
+import { db } from "@/configs/db";
+import { AiGeneratedImage } from "@/configs/schema";
+import { eq } from "drizzle-orm";
+import axios from "axios";
 
 function Listing() {
   const { user } = useUser();
-  const [userRoomList, setUserRoomList] = useState([]);
+  const [userRoomList, setUserRoomList] = useState<any>([]);
+
+  useEffect(()=> {
+    user && GetUserRoomList()
+  },[user])
+
+  const GetUserRoomList = async() => {
+    const res = await axios.post('/api/getUserRooms', {
+      userEmail: user?.primaryEmailAddress?.emailAddress
+    })
+
+    console.log(res.data)
+    setUserRoomList(res.data)
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between">

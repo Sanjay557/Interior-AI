@@ -36,7 +36,7 @@ function AiOutputDialog({ openDialog, closeDialog, orgImage, aiImage }: AiOutput
         <div className="w-full max-w-4xl">
       <ReactBeforeSliderComponent
         firstImage={{ imageUrl: aiImage }}
-        secondImage={{ imageUrl: aiImage }}
+        secondImage={{ imageUrl: orgImage }}
         className="object-contain"
       />
     </div>
