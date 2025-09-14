@@ -9,6 +9,7 @@ import { db } from "@/configs/db";
 import { AiGeneratedImage } from "@/configs/schema";
 import { eq } from "drizzle-orm";
 import axios from "axios";
+import RoomDesignOutput from "./RoomDesignOutput";
 
 function Listing() {
   const { user } = useUser();
@@ -41,7 +42,11 @@ function Listing() {
       ? 
       <EmptyState /> : 
       <div>
-        
+        <div className="grid grid-cols-2 md:grid-col-2 lg:grid-col-3 gap-10">
+          {userRoomList.map((room: any, index:any)=> (
+              <RoomDesignOutput key={index} room={room}/>
+          ))}
+        </div>
       </div>
       }
     </div>
