@@ -41,7 +41,8 @@ function Listing() {
       {userRoomList?.length == 0 
       ? 
       <EmptyState /> : 
-      <div>
+      <div className="mt-10">
+        <h2 className="font-medium text-purple-500 text-xl mb-10">Ai Room Studio</h2>
         <div className="grid grid-cols-2 md:grid-col-2 lg:grid-col-3 gap-10">
           {userRoomList.map((room: any, index:any)=> (
               <RoomDesignOutput key={index} room={room}/>
